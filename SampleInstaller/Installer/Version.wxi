@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<Include>
+
+  <!-- TODO: Give installer name here. This will appear on instaler Wizard -->
+  <?define InstallerName="My Installer" ?>
+
+  <!-- TODO: Give client's company name here. This will appear in Add or remove programs -->
+  <?define Manufacturer="MyCompany" ?>
+  
+  <!-- Versioning. These have to be changed for upgrades.-->
+  <?define MajorVersion="1" ?> <!-- Major: Increment only for Major feature changes -->
+  <?define MinorVersion="0" ?> <!-- Minor: No need to change -->
+  <?define Revision="0" ?>     <!-- TODO: Revision: Increment this value for every release to customer -->
+
+  <!-- Full version number to display -->
+  <?define VersionNumber="$(var.MajorVersion).$(var.MinorVersion).$(var.Revision)" ?>
+
+
+  <!--  Never change this value.  -->
+  <?define UpgradeCode="E9A0339A-E0F9-4130-A491-4607A3C68420" ?>
+
+</Include>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <?include Version.wxi ?>
+
+  <Product Id="*" Name="$(var.InstallerName)" Language="1033" Version="$(var.VersionNumber)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)">
+    
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <UIRef Id="WixUI_InstallDir"/>
+  
+    <Property Id='TARGETDIR' Value='C:\'/>
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <Directory Id="TARGETDIR" Name="SourceDir" ComponentGuidGenerationSeed="{48587CE3-D431-4BE1-92BD-AEE4479557FA}">
+      <Directory Id="DesktopFolder" Name="Desktop" />
+      <Directory Id="INSTALLFOLDER" Name=".">
+      </Directory>
+    </Directory>
+
+    <!-- TODO: Change this path -->
+    <?define SourceDir="D:\work_area\toexewithshortcut"?>
+    
+    <Icon Id="ShortcutIcon.ico" SourceFile="..\Installer\Images\html.ico"/>
+
+    <!-- TODO: Change the file name and path of all files
+               File ID and Component ID should start with a letter
+    -->
+    <DirectoryRef Id="INSTALLFOLDER">
+      
+      <Directory Id="root" Name=".">
+
+        <Component Id="x123.html" Guid="*">
+          <File Id="x123.html" KeyPath="yes" Source="$(var.SourceDir)\123.html" />
+
+          <!-- TODO: Add shortcut for showing desktop shortcut -->
+          <Shortcut Id="DesktopShortcut" Advertise="yes" Name="x123" Directory="DesktopFolder" WorkingDirectory="INSTALLFOLDER" Icon="ShortcutIcon.ico"/>
+        </Component>
+
+        <Component Id="x1.htm" Guid="*">
+          <File Id="x1.htm" KeyPath="yes" Source="$(var.SourceDir)\1.htm" />
+        </Component>
+      </Directory>
+
+      <Directory Id="images" Name="images">
+        <Component Id="loading.gif" Guid="*">
+          <File Id="loading.gif" KeyPath="yes" Source="$(var.SourceDir)\images\loading.gif" />
+        </Component>
+
+        <Component Id="loading_hr.GIF" Guid="*">
+          <File Id="loading_hr.GIF" KeyPath="yes" Source="$(var.SourceDir)\images\loading_hr.GIF" />
+        </Component>
+
+        <Component Id="btn_print.png" Guid="*">
+          <File Id="btn_print.png" KeyPath="yes" Source="$(var.SourceDir)\images\btn_print.png" />
+        </Component>
+
+
+        <Component Id="tic.png" Guid="*">
+          <File Id="tic.png" KeyPath="yes" Source="$(var.SourceDir)\images\tic.png" />
+        </Component>
+
+      </Directory>
+
+      <Directory Id="nbproject" Name="nbproject">
+        <Component Id="project.xml" Guid="*">
+          <File Id="project.xml" KeyPath="yes" Source="$(var.SourceDir)\nbproject\project.xml" />
+        </Component>
+      </Directory>
+
+      <Directory Id="css" Name="css">
+        <Component Id="Style.css" Guid="*">
+          <File Id="Style.css" KeyPath="yes" Source="$(var.SourceDir)\css\Style.css" />
+        </Component>
+      </Directory>
+
+      <Directory Id="js" Name="js">
+        <Component Id="dialog.css" Guid="*">
+          <File Id="dialog.css" KeyPath="yes" Source="$(var.SourceDir)\js\dialog.css" />
+        </Component>
+
+        <Component Id="button.css" Guid="*">
+          <File Id="button.css" KeyPath="yes" Source="$(var.SourceDir)\js\button.css" />
+        </Component>
+
+        <Component Id="Jquery.js" Guid="*">
+          <File Id="Jquery.js" KeyPath="yes" Source="$(var.SourceDir)\js\Jquery.js" />
+        </Component>
+
+      </Directory>
+    </DirectoryRef>
+
+    <!--TODO: all components should be referenced here-->
+    <ComponentGroup Id="ProductComponents">
+      <ComponentRef Id="loading.gif"/>
+      <ComponentRef Id="project.xml"/>
+      <ComponentRef Id="x123.html"/>
+      <ComponentRef Id="loading_hr.GIF"/>
+      <ComponentRef Id="btn_print.png"/>
+      <ComponentRef Id="Style.css"/>
+      <ComponentRef Id="dialog.css"/>
+      <ComponentRef Id="button.css"/>
+      <ComponentRef Id="x1.htm"/>
+      <ComponentRef Id="tic.png"/>
+      <ComponentRef Id="Jquery.js"/>
+    </ComponentGroup>
+
+    <Feature Id="ProductFeature" Title="Installer" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+    
+  </Product>
+</Wix>
